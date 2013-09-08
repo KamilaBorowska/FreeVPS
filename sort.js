@@ -1,9 +1,21 @@
 "use strict"
 var lastColumn
+var body = document.getElementsByTagName('tbody')[0]
+var rows = _.toArray(body.getElementsByTagName('tr'))
+
+function resortHighlighted(rows) {
+    // Put highlighted columns at top
+    rows = _.sortBy(rows, function highlightSort(row) {
+        return !row.getAttribute('class')
+    })
+
+    _.each(rows, function rowPusher(row) {
+        body.appendChild(row)
+    })
+}
+
 _.each(document.getElementsByTagName('th'), function th(elem, i) {
     elem.onclick = function onclick() {
-        var body = document.getElementsByTagName('tbody')[0]
-        var rows = _.toArray(body.getElementsByTagName('tr'))
         var name = this.textContent.trim()
 
         if (lastColumn === name) {
@@ -73,12 +85,24 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             lastColumn = name
         }
 
-        _.each(rows, function rowPusher(row) {
-            body.appendChild(row)
-        })
+        resortHighlighted(rows)
 
         // Apply sorted class
         document.getElementsByClassName('sorted')[0].removeAttribute('class')
         this.setAttribute('class', 'sorted')
+    }
+})
+
+_.each(rows, function tr(elem) {
+    elem.onclick = function onclick() {
+        // Remove highlight if highlighted
+        if (this.getAttribute('class')) {
+            this.removeAttribute('class')
+        }
+        // Highlight if not
+        else {
+            this.setAttribute('class', 'selected')
+        }
+        resortHighlighted(rows)
     }
 })
