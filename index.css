@@ -1,0 +1,35 @@
+table {
+    border-collapse: collapse;
+    font-size: 75%;
+}
+thead tr {
+    border-bottom: 1px solid black;
+    background: #AAF;
+}
+tr {
+    background: #DDF;
+}
+tr:nth-child(even) {
+    background: #EEF;
+}
+th, td {
+    padding: 3px;
+    text-align: center;
+    border: 0;
+}
+.good {
+    background: #DFD;
+}
+tr:nth-child(even) .good {
+    background: #EFE;
+}
+.bad {
+    background: #FDD;
+}
+tr:nth-child(even) .bad {
+    background: #FEE;
+}
+.sorted {
+    background: #FAA;
+    border: 1px solid black;
+}
