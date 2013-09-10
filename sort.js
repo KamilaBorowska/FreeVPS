@@ -68,7 +68,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
             // United States at end
             case 'Location':
-                return value.substring(0, 3) === 'US ' ? 'ZZZ' : value
+                return value.substring(0, 3) === 'US ' ? 'ZZZ' + value : value
 
             // Normal strings
             default:
