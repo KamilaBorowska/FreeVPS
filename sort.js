@@ -3,16 +3,45 @@ var lastColumn
 var body = document.getElementsByTagName('tbody')[0]
 var rows = _.toArray(body.getElementsByTagName('tr'))
 
-function resortHighlighted(rows) {
+function resortHighlighted() {
     // Put highlighted columns at top
-    rows = _.sortBy(rows, function highlightSort(row) {
+    var sortedRows = _.sortBy(rows, function highlightSort(row) {
         return !row.getAttribute('class')
     })
 
-    _.each(rows, function rowPusher(row) {
+    _.each(sortedRows, function rowPusher(row) {
         body.appendChild(row)
     })
 }
+
+function getServers() {
+    return _.filter(
+        location.hash.substring(1).split(','),
+        function isNumber(server) {
+            return /^\d+$/.test(server)
+        }
+    )
+}
+
+window.onhashchange = function onhashchange() {
+    // If location.hash exists, split it by ",", otherwise set it to empty
+    // array
+    var servers = getServers()
+    var set = _.groupBy(servers)
+    _.each(rows, function highlighter(row, i) {
+        // Non-breaking space
+        if (set[row.childNodes[1].textContent.trim().split("\xA0")[1]]) {
+            row.setAttribute('class', 'selected')
+        }
+        // The rows might be alraedy selected
+        else {
+            row.removeAttribute('class')
+        }
+    })
+    resortHighlighted()
+}
+
+onhashchange()
 
 _.each(document.getElementsByTagName('th'), function th(elem, i) {
     elem.onclick = function onclick() {
@@ -85,7 +114,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             lastColumn = name
         }
 
-        resortHighlighted(rows)
+        resortHighlighted()
 
         // Apply sorted class
         document.getElementsByClassName('sorted')[0].removeAttribute('class')
@@ -95,14 +124,24 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
 _.each(rows, function tr(elem) {
     elem.onclick = function onclick() {
+        var i = this.childNodes[1].textContent.trim().split("\xA0")[1]
+        var servers = getServers()
         // Remove highlight if highlighted
         if (this.getAttribute('class')) {
             this.removeAttribute('class')
+            // Remove row from servers
+            servers.splice(servers.indexOf(i), 1)
         }
         // Highlight if not
         else {
             this.setAttribute('class', 'selected')
+            servers.push(i)
         }
-        resortHighlighted(rows)
+        // Update hash
+        location.hash = "#" + servers.sort(function sort(a, b) {
+            return a - b
+        })
+
+        resortHighlighted()
     }
 })
