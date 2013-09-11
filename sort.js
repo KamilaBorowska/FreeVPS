@@ -145,3 +145,10 @@ _.each(rows, function tr(elem) {
         resortHighlighted()
     }
 })
+
+_.each(document.getElementsByTagName('a'), function a(link) {
+    link.onclick = function (e) {
+        // Links are links, not rows.
+        e.stopPropagation()
+    }
+})
