@@ -24,10 +24,10 @@ th, td {
     border: 0;
 }
 .good {
-    background: rgba(200, 255, 200, 0.8);
+    background: rgba(200, 255, 200, 0.6);
 }
 .bad {
-    background: rgba(255, 200, 200, 0.8);
+    background: rgba(255, 200, 200, 0.6);
 }
 .sorted {
     background: #FAA;
