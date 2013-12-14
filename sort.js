@@ -1,5 +1,5 @@
 "use strict"
-var lastColumn
+var lastColumn = null
 var body = document.getElementsByTagName('tbody')[0]
 var rows = _.toArray(body.getElementsByTagName('tr'))
 
@@ -108,7 +108,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
         if (lastColumn === name) {
             // Actually reverse array.
             rows.reverse()
-            lastColumn = undefined
+            lastColumn = null
         }
         else {
             lastColumn = name
