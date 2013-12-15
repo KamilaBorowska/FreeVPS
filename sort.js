@@ -58,7 +58,7 @@ window.onhashchange = function onhashchange() {
         if (set[row.childNodes[1].textContent.trim().split("\xA0")[1]]) {
             row.setAttribute('class', 'selected')
         }
-        // The rows might be alraedy selected
+        // The rows might be already selected
         else {
             row.removeAttribute('class')
         }
