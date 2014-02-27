@@ -104,7 +104,6 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                 return result
 
             // Booleans
-            case 'SSD':
             case 'IPv6 addresses':
             case 'IRC clients':
             case 'IRC bouncers':
