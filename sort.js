@@ -24,7 +24,7 @@
  */
 
 "use strict"
-var lastColumn = null
+var lastColumn = 'Name'
 var body = document.getElementsByTagName('tbody')[0]
 var rows = _.toArray(body.getElementsByTagName('tr'))
 
@@ -82,8 +82,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
         rows = _.sortBy(rows, function sort(row) {
             var value = row.childNodes[i + 1].textContent.trim()
             switch (name) {
-            // Numbers
-            case 'Name':
+            // Numbers (less is more)
             case 'Disk space':
             case 'Bandwidth':
             case 'RAM':
@@ -102,6 +101,10 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                     result *= 1024 * 1024
 
                 return result
+
+            // Numbers (more is more)
+            case 'Name':
+                return +/\d+/.exec(value)
 
             // Booleans
             case 'IPv6 addresses':
