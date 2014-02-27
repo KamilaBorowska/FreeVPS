@@ -87,8 +87,8 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             case 'Disk space':
             case 'Bandwidth':
             case 'RAM':
-            case 'Burst (OpenVZ only)':
-            case 'vSwap (OpenVZ only)':
+            case 'Burst (OpenVZ)':
+            case 'vSwap (OpenVZ)':
             case 'IPv6 addresses':
                 // Negative, so less is more
                 var result = -(/\d+/.exec(value) || [0])[0]
