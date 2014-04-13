@@ -111,10 +111,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
             // Booleans
             case 'IPv6 addresses':
-            case 'IRC clients':
-            case 'IRC bouncers':
-            case 'IRC bots':
-            case 'IRC servers':
+            case 'IRC usage':
             case 'Minecraft':
             case 'Other game servers':
             case 'Java':
