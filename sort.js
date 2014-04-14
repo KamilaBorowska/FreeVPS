@@ -110,11 +110,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                 return +/\d+/.exec(value)
 
             // Booleans
-            case 'IPv6 addresses':
             case 'IRC usage':
-            case 'Minecraft':
-            case 'Other game servers':
-            case 'Java':
                 return {
                     Yes: 1,
                     // LoomHosts
