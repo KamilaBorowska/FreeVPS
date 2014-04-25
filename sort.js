@@ -152,7 +152,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
 _.each(rows, function tr(elem) {
     elem.onclick = function onclick() {
-        var i = getServerName(i)
+        var i = getServerName(this)
         var servers = getServers()
         // Remove highlight if highlighted
         if (this.getAttribute('class')) {
