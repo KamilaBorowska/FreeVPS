@@ -32,7 +32,6 @@ function getServerName(row) {
     // Gets the first cell in row, containing the server name.
     // \xA0 is non-breaking space.
     return row.childNodes[1].textContent.trim().split("\xA0")[1]
-    
 }
 
 function resortHighlighted() {
