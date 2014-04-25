@@ -113,8 +113,6 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             case 'IRC usage':
                 return {
                     Yes: 1,
-                    // LoomHosts
-                    'By request': 2,
                     No: 3
                 }[value]
 
