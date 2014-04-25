@@ -28,6 +28,13 @@ var lastColumn = 'Name'
 var body = document.getElementsByTagName('tbody')[0]
 var rows = _.toArray(body.getElementsByTagName('tr'))
 
+function getServerName(row) {
+    // Gets the first cell in row, containing the server name.
+    // \xA0 is non-breaking space.
+    return row.childNodes[1].textContent.trim().split("\xA0")[1]
+    
+}
+
 function resortHighlighted() {
     // Put highlighted columns at top
     var sortedRows = _.sortBy(rows, function highlightSort(row) {
@@ -55,7 +62,7 @@ window.onhashchange = function onhashchange() {
     var set = _.groupBy(servers)
     _.each(rows, function highlighter(row, i) {
         // Non-breaking space
-        if (set[row.childNodes[1].textContent.trim().split("\xA0")[1]]) {
+        if (set[getServerName(row)]) {
             row.setAttribute('class', 'selected')
         }
         // The rows might be already selected
@@ -145,7 +152,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
 _.each(rows, function tr(elem) {
     elem.onclick = function onclick() {
-        var i = this.childNodes[1].textContent.trim().split("\xA0")[1]
+        var i = getServerName(i)
         var servers = getServers()
         // Remove highlight if highlighted
         if (this.getAttribute('class')) {
