@@ -88,7 +88,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
         rows = _.sortBy(rows, function sort(row) {
             var value = row.childNodes[i + 1].textContent.trim()
             switch (name) {
-            // Numbers (less is more)
+            // Numbers (more is at the top)
             case 'Disk space':
             case 'Bandwidth':
             case 'RAM':
@@ -111,7 +111,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
                 return result
 
-            // Numbers (more is more)
+            // Numbers (less is at the top)
             case 'Name':
                 return +/\d+/.exec(value)
 
