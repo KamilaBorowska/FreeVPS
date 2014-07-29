@@ -116,6 +116,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
 
             // Booleans
             case 'IRC usage':
+            case 'IRC bots':
                 return {
                     Yes: 1,
                     No: 3
