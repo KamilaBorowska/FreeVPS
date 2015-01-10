@@ -119,6 +119,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             case 'IRC bots':
                 return {
                     Yes: 1,
+                    Unknown: 2,
                     No: 3
                 }[value]
 
