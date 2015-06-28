@@ -94,6 +94,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
             case 'Burst (OpenVZ)':
             case 'vSwap (OpenVZ)':
             case 'IPv6 addresses':
+            case 'Connection speed':
                 // Infinity
                 if (value === "\u221E") return -Infinity
 
@@ -103,9 +104,9 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                 // If the value contains GB or TB, multiply it (it doesn't
                 // apply to certain counts, like IPv6 addresses, but running
                 // this code shouldn't hurt anything).
-                if (value.indexOf("GB") !== -1)
+                if (value.indexOf("G") !== -1)
                     result *= 1024
-                else if (value.indexOf("TB") !== -1)
+                else if (value.indexOf("T") !== -1)
                     result *= 1024 * 1024
 
                 return result
