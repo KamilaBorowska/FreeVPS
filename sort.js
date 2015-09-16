@@ -85,7 +85,8 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
         }
 
         rows = _.sortBy(rows, function sort(row) {
-            var value = row.childNodes[i + 1].textContent.trim()
+            var node = row.childNodes[i + 1]
+            var value = node.firstChild.textContent.trim()
             switch (name) {
             // Numbers (more is at the top)
             case 'Disk space':
@@ -98,8 +99,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                 // Infinity
                 if (value === "\u221E") return -Infinity
 
-                // Negative, so less is more
-                var result = -(/\d+(?:\.\d+)?/.exec(value) || [-1])[0]
+                var result = +(/\d+(?:\.\d+)?/.exec(value) || [-1])[0]
 
                 // If the value contains GB or TB, multiply it (it doesn't
                 // apply to certain counts, like IPv6 addresses, but running
@@ -108,8 +108,14 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                     result *= 1024
                 else if (value.indexOf("T") !== -1)
                     result *= 1024 * 1024
+                
+                var power = node.getElementsByTagName('sup')[0]
+                if (power) {
+                    result = Math.pow(result, +power.textContent)
+                }
 
-                return result
+                // Negative, so less is more
+                return -result
 
             // Numbers (less is at the top)
             case 'Name':
