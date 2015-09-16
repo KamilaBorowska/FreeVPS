@@ -99,7 +99,7 @@ _.each(document.getElementsByTagName('th'), function th(elem, i) {
                 if (value === "\u221E") return -Infinity
 
                 // Negative, so less is more
-                var result = -(/\d+/.exec(value) || [-1])[0]
+                var result = -(/\d+(?:\.\d+)?/.exec(value) || [-1])[0]
 
                 // If the value contains GB or TB, multiply it (it doesn't
                 // apply to certain counts, like IPv6 addresses, but running
